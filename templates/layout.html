@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            margin: 5px;
+            padding: 5px;
+            font-family: "Courier New", Courier, monospace;
+            {% block style %}{% endblock %}
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: rgb(117, 28, 1);
+            font-weight: 100;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            font-weight: 100;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .topnav-right {
+            float: right;
+        }
+
+        #search {
+            font-size: 20px;
+            width: 80%;
+            padding: 15px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 25px;
+        }
+        .button {
+            font-size: 20px;
+            width: 15%;
+            padding: 15px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: rgb(5, 153, 54);
+            color: white;
+            margin-right: 25px;
+        }
+        .list {
+            margin: 15px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .list_item {
+            padding: 10px;
+            width: 100%;
+            margin: 10px;
+        }
+        .byauthor {
+            font-size: 15px;
+            color: greenyellow;
+        }
+        .search_list_item:link {
+            color: white;
+            text-decoration: none;
+        }
+        .search_list_item:visited {
+            color: white;
+            text-decoration: none;
+        }
+        .search_list_item:hover {
+            color: #ffea00;
+            text-decoration: none;
+            font-weight: bolder;
+        }
+        .search_list_item:active {
+            color: #ffea00;
+            text-decoration: none;
+        }
+        h1 {
+            font-size: 100px;
+            color: #c70209;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+        }
+        #author {
+            font-size: 40px;
+            color: white;
+        }
+        .nobook {
+            font-size: 30px;
+            color: white;
+            font-style: oblique;
+        }
+        #info {
+            font-size: 20px;
+            list-style-type: "# ";
+        }
+        .heading {
+            color: white;
+            font-size: 70px;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: oblique;
+        }
+        .companyform {
+            
+        }
+        .form-item {
+            font-size: 15px;
+            width: 30%;
+            padding: 15px;
+            display: inline-block;
+            border: 0px solid #ccc;
+            box-sizing: border-box;
+            margin: 5px;
+            margin-left: 0px;
+            background-color: rgb(34, 36, 36);
+            color: white;
+        }
+        .companybutton {
+            font-size: 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            width: 30%;
+            display: inline-block;
+            border: 0px solid #ccc;
+            box-sizing: border-box;
+            margin: 5px;
+            margin-left: 0px;
+            background-color: rgb(117, 0, 0);
+            color: white;
+        }
+        .companybutton:hover {
+            background-color: red;
+        }
+        .userornot {
+            color: white;
+            margin-top: 5px;
+            font-size: 26.31px;
+            font-weight: 50;
+        }
+        .user_link:link {
+            color: white;
+            text-decoration: none;
+        }
+        .user_link:visited {
+            color: white;
+            text-decoration: none;
+        }
+        .user_link:hover {
+            color: #ffea00;
+            text-decoration: none;
+            font-weight: bolder;
+        }
+        .user_link:active {
+            color: #ffea00;
+            text-decoration: none;
+        }
+        #ratethebook {
+            color: rgb(219, 10, 3);
+            font-size: 37px;
+            padding-top: 0px;
+            margin-top: 0px;
+            margin-bottom: 10px;
+        }
+        #notloggedinbook {
+            color: white;
+            font-weight: 700;
+            font-style: oblique;
+        }
+
+        #loginbook:link {
+            color: #ffea00;
+            text-decoration: none;
+        }
+        #loginbook:visited {
+            color: #ffea00;
+            text-decoration: none;
+        }
+        #loginbook:hover {
+            color: #d60404;
+            text-decoration: none;
+            font-weight: bolder;
+        }
+        #loginbook:active {
+            color: #d60404;
+            text-decoration: none;
+        }
+        .reviewform {
+            background-color:rgba(255, 255, 255, 0.2);
+            padding: 20px;
+        }
+
+        .comment {
+            background-color: rgba(255, 255, 255, 0.555);
+            padding: 20px;
+            border: 0px;
+            width: 95%;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .submit_review {
+            width: 97.92%;
+            padding: 20px;
+            font-size: 20px;
+            background-color: goldenrod;
+            font-weight: 900;
+            font-style: oblique;
+        }
+        .your_review {
+            font-size: 20px;
+            color: red;
+        }
+        .your_comment {
+            font-size: 20px;
+        }
+        .your_review_box {
+            background-color:rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px;
+            margin-left: 0px;
+        }
+        .other_review_box {
+            background-color:rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            margin: 20px;
+            margin-left: 0px;
+        }
+        .alert {
+            margin-top: 20px;
+            color: red;
+        }
+    </style>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{{ url_for('index') }}">theBookStudio</a>
+        <div class="topnav-right">
+            {% if 'username' in session %}
+                <div class="dropdown">
+                    <button class="dropbtn">{{ session['username'] }}</button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('logout') }}">LOGOUT</a>
+                    </div>
+                </div>
+                
+            {% else %}
+                <a href="{{ url_for('login') }}">LOGIN</a>
+            {% endif %}
+        </div> 
+    </div>
+    <h1>{% block heading %}{% endblock %}</h1>
+
+    {% block body %}
+    {% endblock %}
+    
+</body>
+</html>

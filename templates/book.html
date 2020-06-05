@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    background-image: url('https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+{% endblock %}
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+
+{% block heading %}
+    {{ book.title }}
+{% endblock %}
+
+{% block body %}
+    <div id="author">by {{ book.name }}</div>
+    <ul id="info">
+        <li>ISBN Number: {{ book.isbn }}</li>
+        <li>Year Published: {{ book.year }}</li>
+        <li>Average Rating: {{ data['books'][0]['average_rating'] }}/5</li>
+        <li>Total Ratings: {{ data['books'][0]['work_ratings_count'] }}</li>
+    </ul>
+
+    {% if 'username' in session %}
+        {% for review in reviews %}
+            <div class="other_review_box">
+                <div>
+                    <b class="other_review_name">{{ review.name }}</b> rated it 
+                    {% if review.rating == 1 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt="">
+                    {% endif %}
+                    {% if review.rating == 2 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt="">
+                    {% endif %}
+                    {% if review.rating == 3 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt="">
+                    {% endif %}
+                    {% if review.rating == 4 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt="">
+                    {% endif %}
+                    {% if review.rating == 5 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="16" alt="">
+                    {% endif %}
+                </div>
+                {% if review.comment %}
+                    <div>
+                        {{ review.comment }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <h3 id="ratethebook"># Rate The Book</h3>
+        {% if review %}
+            <div class="your_review_box">
+                <div class="your_review">
+                    YOUR RATING:
+                    {% if review.rating == 1 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt="">
+                    {% endif %}
+                    {% if review.rating == 2 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt="">
+                    {% endif %}
+                    {% if review.rating == 3 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt="">
+                    {% endif %}
+                    {% if review.rating == 4 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt="">
+                    {% endif %}
+                    {% if review.rating == 5 %}
+                        <img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt="">
+                    {% endif %}
+                </div>
+                {% if review.comment %}
+                    <div class="your_review">
+                        COMMENT: <span class="your_comment">{{ review.comment }}</span>
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <form class="reviewform" action="{{ url_for('book', book_id=book.id) }}" method="post">
+                <h2>Star Rating</h2>
+                <input type="radio" name="rating" id="5" value=5>
+                <label for="5"><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""></label><br>
+                <input type="radio" name="rating" id="4" value=4>
+                <label for="4"><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""></label><br>
+                <input type="radio" name="rating" id="3" value=3>
+                <label for="3"><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""></label><br>
+                <input type="radio" name="rating" id="2" value=2>
+                <label for="2"><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""></label><br>
+                <input type="radio" name="rating" id="1" value=1>
+                <label for="1"><img src="https://webstockreview.net/images/clipart-images-gold-18.png" width="24" alt=""></label><br>
+                
+                <h2>Add a Comment</h2>
+                <input autocomplete="off" placeholder="COMMENT" class="comment" type="text" name="comment">
+                <button class="submit_review">Submit</button>
+            </form>
+        {% endif %}
+    {% else %}
+        <div id="notloggedinbook">you must be logged in to submit a review! <a id="loginbook" href="{{ url_for('login') }}">login HERE</a></div>
+
+    {% endif %}
+
+    
+{% endblock %}

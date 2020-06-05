@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    background-image: url('https://wallpapercave.com/wp/wp2090540.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+{% endblock %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block heading %}
+{% endblock %}
+
+{% block body %}
+    
+    <h1 class="heading">Login Page</h1>
+    <form class="companyform" action="{{ url_for('login') }}" method="post">
+        <input class="form-item" type="text" name="username" placeholder="Email"><br>
+        <input class="form-item" type="password" name="password" placeholder="Password"><br>
+        <button class="companybutton">Log in</button>
+    </form>
+    <div class="alert" role="alert">
+        {{ message }}
+    </div>
+    <div class="userornot"># Not a User? <a class="user_link" href="{{ url_for('register') }}">Register HERE</a></div>
+{% endblock %}

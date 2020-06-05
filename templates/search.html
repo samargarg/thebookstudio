@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    background-image: url('https://images.pexels.com/photos/960137/pexels-photo-960137.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+{% endblock %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block heading %}
+    
+{% endblock %}
+
+{% block body %}
+<div>
+    <form autocomplete="off" action="{{ url_for('search') }}" method="post">
+        <input id="search" type="text" name="search_item" placeholder="Search Books by Title, Author or ISBN Number">
+        <button class="button">SEARCH</button>
+    </form>
+</div>
+    
+<div class="list">
+    {% for book in books %}
+        <div class="list_item"><a class="search_list_item" href="{{ url_for('book', book_id=book.id) }}"># {{ book.title }} <span class="byauthor">by {{ book.name }}</span></a></div>
+        
+    {% else %}
+        <div class="nobook">No Book Found</div>
+    {% endfor %}
+</div>
+
+
+    
+    
+{% endblock %}

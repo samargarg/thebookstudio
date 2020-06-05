@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block style %}
+    background-image: url('https://wallpapercave.com/wp/wp2090540.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+{% endblock %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block heading %}
+{% endblock %}
+
+{% block body %}
+    <h1 class="heading">Create Account</h1>
+    <form class="companyform" action="{{ url_for('register') }}" method="post"><br>
+        <input autocomplete="off" class="form-item" type="text" name="name" placeholder="Name"><br>
+        <input autocomplete="off" class="form-item" type="text" name="username" placeholder="Email"><br>
+        <input class="form-item" type="password" name="password" placeholder="Password"><br>
+        <button class="companybutton">Sign up</button>
+    </form>
+    <div class="alert" role="alert">
+        {{ message }}
+    </div>
+        
+{% endblock %}

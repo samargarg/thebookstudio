@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 5px;
+            padding: 5px;
+            font-family: "Courier New", Courier, monospace;
+            
+            background-image: url("https://avante.biz/wp-content/uploads/Cool-Hd-Wallpaper/Cool-Hd-Wallpaper-063.jpg");
+            background-size: 100%;
+        }
+        h1 {
+            text-align: center;
+            font-size: 130px;
+            color: white;
+        }
+        #search {
+            font-size: 20px;
+            width: 80%;
+            padding: 15px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 25px;
+        }
+        .button {
+            font-size: 20px;
+            width: 15%;
+            padding: 15px;
+            display: inline-block;
+            border: 0px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: rgb(4, 194, 77);
+            color: white;
+            margin-right: 25px;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #6a1807;
+            font-weight: 100;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            font-weight: 100;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: red;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .topnav-right {
+            float: right;
+        }
+    </style>
+    <title>The Book Studio</title>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('index') }}">theBookStudio</a>
+        <div class="topnav-right">
+            {% if 'username' in session %}
+                <div class="dropdown">
+                    <button class="dropbtn">{{ name }}</button>
+                    <div class="dropdown-content">
+                        <a href="{{ url_for('logout') }}">LOGOUT</a>
+                    </div>
+                </div>
+                
+            {% else %}
+                <a href="{{ url_for('login') }}">LOGIN</a>
+            {% endif %}
+        </div> 
+    </div>
+    <h1>The Book Studio</h1>
+
+
+    <div>
+        <form autocomplete="off" action="{{ url_for('search') }}" method="post">
+            <input id="search" type="text" name="search_item" placeholder="Search Books by Title, Author or ISBN Number">
+            <button class="button">SEARCH</button>
+        </form>
+        
+    </div>
+</body>
+</html>
